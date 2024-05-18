@@ -9,7 +9,7 @@ import threading
 # This function is used to play the music
 def music_player(play_flag):
     while play_flag.is_set():
-        ps.playsound("Music/CountrySounds-short.mp3")
+        ps.playsound("Music/CountrySounds.mp3")
 
 def main():
     # Disable scientific notation for clarity
@@ -22,7 +22,7 @@ def main():
     class_names = open("Model/converted_keras/labels.txt", "r").readlines()
 
     # CAMERA can be 0 or 1 based on default camera of your computer
-    camera = cv2.VideoCapture(0)
+    camera = cv2.VideoCapture(1)
 
     # Create a process for the music player
     play_flag = threading.Event()
@@ -88,4 +88,4 @@ def main():
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    main()
+    main() 

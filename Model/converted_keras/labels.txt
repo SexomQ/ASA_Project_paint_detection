@@ -1,2 +1,2 @@
-0 Empty
-1 Tablou
+0 Nu
+1 Statuie
