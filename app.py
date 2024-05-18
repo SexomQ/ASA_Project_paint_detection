@@ -9,7 +9,7 @@ import threading
 # This function is used to play the music
 def music_player(play_flag):
     while play_flag.is_set():
-        ps.playsound("Music/CountrySounds.mp3")
+        ps.playsound("Music/CountrySounds-short.mp3")
 
 def main():
     # Disable scientific notation for clarity
@@ -22,7 +22,7 @@ def main():
     class_names = open("Model/converted_keras/labels.txt", "r").readlines()
 
     # CAMERA can be 0 or 1 based on default camera of your computer
-    camera = cv2.VideoCapture(1)
+    camera = cv2.VideoCapture(0)
 
     # Create a process for the music player
     play_flag = threading.Event()
@@ -61,18 +61,26 @@ def main():
 
         # If the class name is "Tablou", then play the sound
         if class_name[2:] == class_names[1][2:]:
-            if not keep_playing:
-                play_flag.set()
-                song_thread = threading.Thread(target=music_player, args=(play_flag,))
-                song_thread.start()
-                last_detection_time = time.time()
-                keep_playing = True
+            # if not keep_playing:
+            #     play_flag.set()
+            #     song_thread = threading.Thread(target=music_player, args=(play_flag,))
+            #     song_thread.start()
+            #     last_detection_time = time.time()
+            #     keep_playing = True
+
+            print("playing sound...")
+            ps.playsound("Music/CountrySounds-short.mp3")
+            camera.release()
+            cv2.destroyAllWindows()
+            camera = cv2.VideoCapture(0)
+
+            
 
         # If the class name is "Empty", then stop the sound
-        else:
-            if keep_playing and (time.time() - last_detection_time > 4):
-                play_flag.clear()
-                keep_playing = False
+        # else:
+        #     if keep_playing and (time.time() - last_detection_time > 4):
+        #         play_flag.clear()
+        #         keep_playing = False
             
 
         # Listen to the keyboard for pressed.
